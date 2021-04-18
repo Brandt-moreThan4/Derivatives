@@ -1,5 +1,4 @@
-
-#Derivative Project
+# Derivative Project
 
 For now, I am planning on just using the below google doc to keep track of everything.
 
