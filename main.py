@@ -9,14 +9,6 @@ from datetime import date, timedelta
 from options import Call, Portfolio, Underlying
 
 sns.set_theme()
-"""Things to do:
-- Have some function like "Plot Strategies"" which will just plot various possible strategies of an underlying (calendar
-  spread, bull spread, straddle, straggle, and anything else.
-- Add puts
-- Maybe longer term do something like: enter an underlying's expected return
-- Think about transferring it to the web
-- Maybe add the ability to have positions which are made up of a certain quantity of the security you are trading.
-"""
 
 RISK_FREE_RATE = .04  # Continuously compounded, annual risk free rate.
 
