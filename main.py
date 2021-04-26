@@ -5,7 +5,6 @@ import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
 from datetime import date, timedelta
-
 from options import Call, Portfolio, Underlying
 
 sns.set_theme()
@@ -18,8 +17,8 @@ def main():
 
     # Create two options that expire in 51 days. One long, the other short.
     option_expiration = date.today() + timedelta(days=50)
-    call = Call(underlying=luv_stock, strike=100, expiration=option_expiration)
-    call2 = Call(underlying=luv_stock, strike=120, expiration=option_expiration, pos_type='short')
+    call = Call(underlying=luv_stock, strike=100, expiration=option_expiration, risk_free_rate=RISK_FREE_RATE)
+    call2 = Call(underlying=luv_stock, strike=120, expiration=option_expiration, risk_free_rate=RISK_FREE_RATE, pos_type='short')
 
     positions = [call, call2]
     portfolio = Portfolio(positions=positions)

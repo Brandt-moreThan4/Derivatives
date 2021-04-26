@@ -16,8 +16,6 @@ from utils import bsm
 
 sns.set_theme()
 
-RISK_FREE_RATE = .04  # Continuously compounded, annual risk free rate.
-
 
 class Underlying:
     """Class to represent some underlying. This will contain all of the information about a particular security which
@@ -39,7 +37,7 @@ class Underlying:
 class Call:
     """Used to represent a european call option."""
 
-    def __init__(self, underlying: Underlying, strike: float, expiration: datetime.date, cost: float = None,
+    def __init__(self, underlying: Underlying, strike: float, expiration: datetime.date, risk_free_rate, cost: float = None,
                  pos_type='long'):
 
         self.underlying = underlying
@@ -48,7 +46,7 @@ class Call:
         self.position_type = pos_type
         if cost is None:
             # If you do not provide a cost when creating this option then it will be assumed to be the BSM value.
-            self.cost = self.calc_value()
+            self.cost = self.calc_value(risk_free_rate)
         else:
             self.cost = cost
 
@@ -65,13 +63,13 @@ class Call:
         profit = self.calc_payoff(underlying_price) - self.cost
         return profit
 
-    def calc_value(self, model='bsm'):
+    def calc_value(self, risk_free_rate: float, model=bsm):
         """Calculated the value using bsm as default. At some point, this should be extended so that you can input
         whichever pricing model you would like."""
 
         time_to_expire = (self.expiration - datetime.date.today()).days / 365
-        if model == 'bsm':
-            return bsm(self.underlying.price, self.strike, RISK_FREE_RATE, time_to_expire, self.underlying.vol)
+        # every model should expect the same arguments
+        return model(self.underlying.price, self.strike, risk_free_rate, time_to_expire, self.underlying.vol)
 
     def get_top_price(self, percent_range: float = 2.0):
         """This will return an appropriate maximum price to use for payoff diagrams which will be based on

@@ -1,8 +1,5 @@
-"""Is there a better way to do this? Feels sloppy to just dump a bunch of random functions into a folder."""
-
 import numpy as np
 from scipy.stats import norm
-
 
 def bsm(s, k, r, t, v, put=False):
     """Calculate the black-scholes-merton value of a european option. 'r' should be the continuously compounded
@@ -15,5 +12,4 @@ def bsm(s, k, r, t, v, put=False):
     else:
         # I have not tested this yet to make sure it works. It should tho.
         option_value = k * np.exp(-r * t) * norm.cdf(-d2) - s * norm.cdf(-d1)
-
     return option_value
