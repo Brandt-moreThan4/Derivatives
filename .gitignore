@@ -1,0 +1,2 @@
+# ignore virtual environments (should be named the same as the project)
+derivatives/
