@@ -1,2 +1,4 @@
 # ignore virtual environments (should be named the same as the project)
 derivatives/
+__pycache__/
+.idea/
